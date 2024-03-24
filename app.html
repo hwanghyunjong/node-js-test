@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Submission</title>
+</head>
+
+<body>
+    <h1>Submit Form</h1>
+    <form id="myForm" action="/submit" method="post">
+        <button type="submit">Submit</button>
+    </form>
+
+    <script>
+        // Optional: You can use JavaScript to handle form submission asynchronously
+        document.getElementById("myForm").addEventListener("submit", async function(event) {
+            event.preventDefault(); // Prevent default form submission
+            const formData = new FormData(this);
+
+            try {
+                const response = await fetch("/submit", {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        id: 'IF-001'
+                    })
+                });
+
+                const data = await response.json();
+            } catch (error) {
+                console.error("Error:", error);
+            }
+        });
+    </script>
+</body>
+</html>
